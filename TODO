@@ -1,0 +1,44 @@
+1, support type, such as @javascript, @chrome
+2, feature, scenario, background -> multi levels (minitest)
+3, config capybara (with type)
+4, read data from table, excel... (adapters)
+      @user
+
+::CONFIG::
+
+environments:
+  javascript:
+    capybara:
+      [asset_root = String]              Where static assets are located, used by save_and_open_page
+      [app_host = String]                The default host to use when giving a relative URL to visit
+      [run_server = Boolean]             Whether to start a Rack server for the given Rack app (Default: true)
+      [default_selector = :css/:xpath]   Methods which take a selector use the given type by default (Default: CSS)
+      [default_wait_time = Integer]      The number of seconds to wait for asynchronous processes to finish (Default: 2)
+      [ignore_hidden_elements = Boolean] Whether to ignore hidden elements on the page (Default: false)
+      [default_driver = Symbol]          The name of the driver to use by default. (Default: :rack_test)
+      [javascript_driver = Symbol]       The name of a driver to use for JavaScript enabled tests. (Default: :selenium)
+
+
+::FILES::
+
+=== tables
+= post_a_article.table
+post a article
+  login system
+    | name   | password | rightpassword? | message   |
+    | jinzhu | aaa      | true           | /success/ |
+    | jinzhu | bbb      | false          | /fail/    |
+
+=== features
+= post_a_article_spec.rb
+feature 'user login' do
+  background :type => [:javascript,:chrome] do
+  end
+
+  scenario 'login' do
+    feature 'user login' do
+      background do
+      end
+    end
+  end
+end

@@ -1,0 +1,16 @@
+In order to post a article you need to login first
+
+== post a article > login to admin page
+| username | password       | message            |
+| jinzhu   | right_password | /login successful/ |
+| jinzhu   | wrong_password | /login fail/       |
+
+
+If you save a article as draft, this article should not be shown to public
+
+== post a article > save as draft
+| owner? | save_as_draft | visable? |
+| true   | true          | true     |
+| false  | true          | false    |
+| true   | false         | true     |
+| false  | false         | true     |

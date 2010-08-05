@@ -22,13 +22,19 @@ class MiniTest::Spec
 	class << self
 		def scenario desc, opts = {}, &block
       return if opts[:type] && !Tester.should_run_type?(opts[:type])
-			it desc, &block
+
+      ## add settings
+			it desc do
+        self.instance_exec(&block)
+      end
 		end
 		alias :Scenario :scenario
 
 		def background type = :each, opts = {}, &block
       return if opts[:type] && !Tester.should_run_type?(opts[:type])
-			before type, &block
+			before type do
+        self.instance_exec(&block)
+      end
 		end
 		alias :Background :background
 	end
@@ -37,7 +43,9 @@ end
 module Kernel
 	def feature desc, opts = {}, &block
     return if opts[:type] && !Tester.should_run_type?(opts[:type])
-		describe desc, &block
+    describe desc do
+      self.instance_exec(&block)
+    end
 	end
 	alias :Feature :feature
 end

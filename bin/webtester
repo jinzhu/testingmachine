@@ -1,0 +1,30 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require File.expand_path('../lib/tester',File.dirname(__FILE__))
+
+options = {}
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: webtester -t types file1 file2 / directoris"
+
+  opts.on( '-t', '--type types', 'types' ) do |types|
+    Tester::Configuration.types =  types.split(',')
+  end
+
+  opts.on( '-h', '--help', 'Display this screen' ) do
+    puts opts
+    exit
+  end
+
+  opts.parse!
+end
+
+ARGV.push('.') if ARGV.size == 0
+
+ARGV.map do |f|
+  if File.file?(f)
+    require f
+  elsif File.directory?(f)
+    Dir["#{f}/**/*_spec.rb"].map { |x| require x }
+  end
+end

@@ -1,5 +1,5 @@
 module Tester
-	class Parse
+	module Parse
 		class PlainText
 			@@data = {}
 			attr_accessor :file, :name, :headers
@@ -44,10 +44,10 @@ module Tester
 		end
 
 		class PlainText::Row
-			attr_accessor :values
+			attr_accessor :values, :headers
 
 			def initialize(values, headers)
-				self.values = []
+				self.values, self.headers = [], headers
 
 				[values, headers].transpose.map do |value, header|
 					self.instance_eval <<-EOF

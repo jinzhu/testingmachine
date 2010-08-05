@@ -3,6 +3,9 @@ module Tester
     class << self
       attr_accessor :types
 
+      def root
+      end
+
       def load_settings
         ## load settings
       end

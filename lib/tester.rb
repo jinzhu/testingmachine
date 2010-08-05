@@ -23,9 +23,15 @@ class MiniTest::Spec
 		def scenario desc, opts = {}, &block
       return if opts[:type] && !Tester.should_run_type?(opts[:type])
 
-      ## add settings
-			it desc do
-        self.instance_exec(&block)
+      ## TODO add settings
+      Tester::Table[desc].map do |example|
+        it desc do
+          example.headers.map do |header|
+            instance_variable_set("@#{header}", example.send(header.to_sym))
+          end
+
+          self.instance_exec(&block)
+        end
       end
 		end
 		alias :Scenario :scenario
@@ -43,6 +49,7 @@ end
 module Kernel
 	def feature desc, opts = {}, &block
     return if opts[:type] && !Tester.should_run_type?(opts[:type])
+    ## TODO add settings to background
     describe desc do
       self.instance_exec(&block)
     end

@@ -12,6 +12,9 @@ MiniTest::Unit.autorun
 
 module Tester
   def self.should_run_type?(types)
+    return true if types.nil?
+    return true if Tester::Configuration.types.nil?
+    types = types.to_a.map(&:to_s)
     (types - Tester::Configuration.types) != types
   end
 end
@@ -21,7 +24,8 @@ class MiniTest::Spec
 
 	class << self
 		def scenario desc, opts = {}, &block
-      return if opts[:type] && !Tester.should_run_type?(opts[:type])
+      return unless Tester.should_run_type?(opts[:type])
+
       Tester::Configuration.load_setting_for_types(opts[:type])
       test_file = File.expand_path(caller[0].sub(/:.*$/,''))
 
@@ -46,7 +50,7 @@ class MiniTest::Spec
     alias :Scenario :scenario
 
     def background type = :each, opts = {}, &block
-      return if opts[:type] && !Tester.should_run_type?(opts[:type])
+      return unless Tester.should_run_type?(opts[:type])
       before type do
         self.instance_exec(&block)
       end
@@ -57,7 +61,7 @@ end
 
 module Kernel
 	def feature desc, opts = {}, &block
-    return if opts[:type] && !Tester.should_run_type?(opts[:type])
+    return unless Tester.should_run_type?(opts[:type])
     test_file = File.expand_path(caller[0].sub(/:.*$/,''))
 
     describe desc do

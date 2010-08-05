@@ -24,21 +24,28 @@ class MiniTest::Spec
       return if opts[:type] && !Tester.should_run_type?(opts[:type])
 
       ## TODO add settings
-      Tester::Table[desc].map do |example|
-        it desc do
-          example.headers.map do |header|
-            instance_variable_set("@#{header}", example.send(header.to_sym))
-          end
+      it desc do
+        @_tester_name_chain = ((@_tester_name_chain || '') + ' > ' + desc).sub(/^ > /,'')
+        data_table = Tester::Table[@_tester_name_chain]
 
+        if data_table
+          data_table.map do |example|
+            example.headers.map do |header|
+              instance_variable_set("@#{header}", example.send(header.to_sym))
+            end
+            self.instance_exec(&block)
+          end
+        else
+          ## at least run once
           self.instance_exec(&block)
         end
       end
-		end
-		alias :Scenario :scenario
+    end
+    alias :Scenario :scenario
 
-		def background type = :each, opts = {}, &block
+    def background type = :each, opts = {}, &block
       return if opts[:type] && !Tester.should_run_type?(opts[:type])
-			before type do
+      before type do
         self.instance_exec(&block)
       end
 		end
@@ -51,6 +58,9 @@ module Kernel
     return if opts[:type] && !Tester.should_run_type?(opts[:type])
     ## TODO add settings to background
     describe desc do
+      before do
+        @_tester_name_chain = ((@_tester_name_chain || '') + ' > ' + desc).sub(/^ > /,'')
+      end
       self.instance_exec(&block)
     end
 	end

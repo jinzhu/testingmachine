@@ -1,7 +1,7 @@
 module Tester
   class Table
     def self.[] name
-      test_file  = caller[1].sub(/:.*$/,'')
+      test_file  = caller[-1].sub(/:.*$/,'')
       table_file = test_file.sub(/_spec\.rb$/,'').sub(/\/features\//,'/tables/') + '.table'
 
       if File.exist?(table_file)

@@ -12,7 +12,7 @@ module Tester
 
 			def self.[](file, name)
 				parse(file) unless @@data[file]
-				@@data[file][name]
+				@@data[file] && @@data[file][name]
 			end
 
 			def add_row(values)
@@ -25,8 +25,10 @@ module Tester
 			protected
 			def self.parse(file)
 				table = nil
+        absolute_filepath = File.join(Tester::Configuration.root + '/tables/', file + '.table')
+        return unless File.exist?(absolute_filepath)
 
-				File.read(file).each_line do |line|
+				File.read(absolute_filepath).each_line do |line|
 					if line =~ /^== (.*)$/
 						table = self.new(file, $1)
 					end

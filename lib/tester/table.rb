@@ -1,18 +1,15 @@
 module Tester
   class Table
-    def self.[] name
-      test_file  = caller[-1].sub(/:.*$/,'')
-      table_file = test_file.sub(/_spec\.rb$/,'').sub(/\/features\//,'/tables/') + '.table'
+    def self.[] test_file, name
+      parse_format = Tester::Configuration.config['table_format'] || 'plain_text'
 
-      if File.exist?(table_file)
-        return Tester::Parse::PlainText[table_file, name]
-      end
+      table_file = test_file.sub(/_spec\.rb$/,'').sub(/^#{Tester::Configuration.root}\/features\//) do
+        Tester::Configuration.root + '/tables/'
+      end + '.table'
 
-      # TODO get caller's filename
-      # caller
-      # Read Configure, which parser?
-      # :plain_text
-      # Tester::Paser::PlainText[filename, name] => array -> before_each set var
+      parse_format = parse_format.capitalize.gsub(/_(\w)/) { $1.capitalize }
+
+      return Tester::Parse.const_get(parse_format)[table_file, name]
     end
   end
 end

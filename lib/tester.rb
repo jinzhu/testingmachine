@@ -23,11 +23,12 @@ class MiniTest::Spec
 		def scenario desc, opts = {}, &block
       return if opts[:type] && !Tester.should_run_type?(opts[:type])
       Tester::Configuration.load_setting_for_types(opts[:type])
+      test_file = File.expand_path(caller[0].sub(/:.*$/,''))
 
       ## TODO add settings
       it desc do
         @_tester_name_chain = ((@_tester_name_chain || '') + ' > ' + desc).sub(/^ > /,'')
-        data_table = Tester::Table[@_tester_name_chain]
+        data_table = Tester::Table[test_file, @_tester_name_chain]
 
         if data_table
           data_table.map do |example|
@@ -57,11 +58,12 @@ end
 module Kernel
 	def feature desc, opts = {}, &block
     return if opts[:type] && !Tester.should_run_type?(opts[:type])
-    ## TODO add settings to background
+    test_file = File.expand_path(caller[0].sub(/:.*$/,''))
+
     describe desc do
       before do
         @_tester_name_chain = ((@_tester_name_chain || '') + ' > ' + desc).sub(/^ > /,'')
-        data_table = Tester::Table[@_tester_name_chain]
+        data_table = Tester::Table[test_file, @_tester_name_chain]
 
         if data_table
           data_table.map do |example|

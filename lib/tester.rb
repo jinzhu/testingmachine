@@ -60,7 +60,17 @@ module Kernel
     describe desc do
       before do
         @_tester_name_chain = ((@_tester_name_chain || '') + ' > ' + desc).sub(/^ > /,'')
+        data_table = Tester::Table[@_tester_name_chain]
+
+        if data_table
+          data_table.map do |example|
+            example.headers.map do |header|
+              instance_variable_set("@#{header}", example.send(header.to_sym))
+            end
+          end
+        end
       end
+
       self.instance_exec(&block)
     end
 	end

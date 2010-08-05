@@ -22,6 +22,7 @@ class MiniTest::Spec
 	class << self
 		def scenario desc, opts = {}, &block
       return if opts[:type] && !Tester.should_run_type?(opts[:type])
+      Tester::Configuration.load_setting_for_types(opts[:type])
 
       ## TODO add settings
       it desc do

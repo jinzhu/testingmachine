@@ -1,0 +1,11 @@
+types:
+  all:
+    capybara:
+      asset_root: 'tmp'
+      app_host: 'http://google.com'
+      run_server: true
+      default_selector: :css
+      default_wait_time: 3
+      ignore_hidden_elements: false
+      default_driver: :selenium
+      javascript_driver: :selenium

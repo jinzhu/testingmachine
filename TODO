@@ -2,7 +2,7 @@
 2, feature, scenario, background -> multi levels (minitest)
 3, config capybara (with type)
 4, read data from table, excel... (adapters)
-      @user
+     @user
 5, support multi tables?
 
 ::CONFIG::

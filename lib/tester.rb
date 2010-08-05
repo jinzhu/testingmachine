@@ -3,21 +3,31 @@ require 'rubygems'
 require 'capybara'
 require 'capybara/dsl'
 require 'minitest/spec'
+require 'tester/configuration'
 require 'tester/parse'
 require 'tester/table'
+
 Capybara.default_driver = :selenium
 MiniTest::Unit.autorun
+
+module Tester
+  def self.should_run_type?(types)
+    (types - Tester::Configuration.types) != types
+  end
+end
 
 class MiniTest::Spec
   include Capybara
 
 	class << self
-		def scenario desc, &block
+		def scenario desc, opts = {}, &block
+      return if opts[:type] && !Tester.should_run_type?(opts[:type])
 			it desc, &block
 		end
 		alias :Scenario :scenario
 
-		def background type = :each, &block
+		def background type = :each, opts = {}, &block
+      return if opts[:type] && !Tester.should_run_type?(opts[:type])
 			before type, &block
 		end
 		alias :Background :background
@@ -25,7 +35,8 @@ class MiniTest::Spec
 end
 
 module Kernel
-	def feature desc, &block
+	def feature desc, opts = {}, &block
+    return if opts[:type] && !Tester.should_run_type?(opts[:type])
 		describe desc, &block
 	end
 	alias :Feature :feature

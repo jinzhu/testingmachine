@@ -26,8 +26,6 @@ module Tester
 			def self.parse(file)
 				table = nil
         absolute_filepath = File.join(Tester::Configuration.root + '/tables/', file + '.table')
-        puts absolute_filepath
-        puts File.exist?(absolute_filepath)
         return unless File.exist?(absolute_filepath)
 
 				File.read(absolute_filepath).each_line do |line|

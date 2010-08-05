@@ -1,2 +1,4 @@
 1, more table parser adapters: excel sql(web interface)?
 2, support multi tables?
+3, rake task, bin file
+4, write more test

@@ -8,7 +8,7 @@ OptionParser.new do |opts|
   opts.banner = "Usage: webtester -t types file1 file2 / directoris"
 
   opts.on( '-t', '--type types', 'types' ) do |types|
-    Tester::Configuration.types =  types.split(',').map(&:to_s)
+    Tester::Configuration.types = types.split(',').map(&:to_s)
   end
 
   opts.on( '-h', '--help', 'Display this screen' ) do

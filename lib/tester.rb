@@ -12,8 +12,8 @@ MiniTest::Unit.autorun
 
 module Tester
   def self.should_run_type?(types)
-    return true if types.nil?
-    return true if Tester::Configuration.types.nil?
+    return true  if Tester::Configuration.types.nil?
+    return false if types.nil?
     types = types.to_a.map(&:to_s)
     (types - Tester::Configuration.types) != types
   end
@@ -61,7 +61,7 @@ end
 
 module Kernel
 	def feature desc, opts = {}, &block
-    return unless Tester.should_run_type?(opts[:type])
+    # return unless Tester.should_run_type?(opts[:type])
     test_file = File.expand_path(caller[0].sub(/:.*$/,''))
 
     describe desc do

@@ -11,6 +11,7 @@ begin
     gem.homepage = "http://github.com/jinzhu/tester"
     gem.authors = ["Jinzhu"]
     gem.add_dependency "minitest"
+    gem.add_dependency "capybara"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

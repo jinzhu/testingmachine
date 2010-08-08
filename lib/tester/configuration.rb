@@ -6,7 +6,8 @@ module Tester
       attr_accessor :types, :root
 
       def root
-        @root ||= File.expand_path('.')
+				test_path = File.expand_path('tester')
+        @root ||= (rails_root? && File.exist?(test_path)) ? test_path : File.expand_path('.')
       end
 
       def config
@@ -27,6 +28,11 @@ module Tester
         capybara_config = config && config['capybara']
         capybara_config.map { |f| Capybara.send((f[0] + '=').to_sym, f[1]) } if capybara_config
       end
+
+			protected
+			def rails_root?
+				File.exist?('config/application.rb')
+			end
     end
   end
 end

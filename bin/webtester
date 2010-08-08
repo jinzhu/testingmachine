@@ -19,7 +19,7 @@ OptionParser.new do |opts|
   opts.parse!
 end
 
-ARGV.push('.') if ARGV.size == 0
+ARGV.push(Tester::Configuration.root) if ARGV.size == 0
 
 ARGV.map do |f|
   if File.file?(f)

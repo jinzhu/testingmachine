@@ -3,10 +3,10 @@ require 'yaml'
 module Tester
   class Configuration
     class << self
-      attr_accessor :types
+      attr_accessor :types, :root
 
       def root
-        File.expand_path('.')
+        @root ||= File.expand_path('.')
       end
 
       def config

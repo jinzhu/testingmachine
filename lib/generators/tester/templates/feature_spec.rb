@@ -1,5 +1,5 @@
 feature "Feature name" do
   scenario "Scenario name" do
-    true.should == true
+    true.must_equal true
   end
 end

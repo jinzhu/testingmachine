@@ -1,0 +1,10 @@
+write your fixture here
+
+Example:
+
+In order to post a article you need to login first
+
+== post a article > login to admin page
+| username | password       | message            |
+| jinzhu   | right_password | /login successful/ |
+| jinzhu   | wrong_password | /login fail/       |

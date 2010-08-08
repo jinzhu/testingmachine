@@ -12,9 +12,10 @@ DESC
 
     def manifest
       ARGV.map do |name|
-        @name = name.gsub(/[A-Z]/) {|x| '_' + x.downcase }.sub(/^_/,'').gsub(/\/_/,'/')
+        @name          = name.gsub(/[A-Z]/) {|x| '_' + x.downcase }.sub(/^_/,'').gsub(/\/_/,'/')
         spec_filename  = "tester/features/#{@name}_spec.rb"
         table_filename = "tester/tables/#{@name}.table"
+        @const_name    = File.basename(@name).capitalize.gsub(/_(\w)/) { $1.capitalize }
 
         empty_directory File.dirname(spec_filename)
         template "feature_spec.rb", spec_filename

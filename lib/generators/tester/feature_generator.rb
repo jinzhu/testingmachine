@@ -11,7 +11,12 @@ Description:
 DESC
 
     def manifest
-      template       'feature.feature', 'tester/features/'
+      ARGV.map do |name|
+        @name = name.gsub(/[A-Z]/) {|x| '_' + x.downcase }.sub(/^_/,'').gsub(/\/_/,'/')
+        filename = "tester/features/#{@name}_spec.rb"
+        empty_directory File.dirname(filename)
+        template "feature_spec.rb", filename
+      end
     end
   end
 end

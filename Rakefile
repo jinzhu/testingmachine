@@ -4,11 +4,11 @@ require 'rake'
 begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
-    gem.name = "webtester"
+    gem.name = "protester"
     gem.summary = %Q{your trusty, tireless tester}
     gem.description = %Q{your trusty, tireless tester}
     gem.email = "wosmvp@gmail.com"
-    gem.homepage = "http://github.com/jinzhu/tester"
+    gem.homepage = "http://github.com/jinzhu/protester"
     gem.authors = ["Jinzhu"]
     gem.add_dependency "minitest"
     gem.add_dependency "capybara"
@@ -48,7 +48,7 @@ Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title = "tester #{version}"
+  rdoc.title = "protester #{version}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end

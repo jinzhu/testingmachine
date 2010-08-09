@@ -1,9 +1,8 @@
 require 'helper'
 
-describe 'parse/plain_text.rb' do
-	it 'should parse plain_text.table correctly' do
+feature 'parse/plain_text.rb' do
+	scenario 'should parse plain_text.table correctly' do
 		file = 'plain_text_test'
-    mock(Tester::Configuration).root { File.expand_path('tester/fixtures') }
 
 		login_table = Tester::Parse::PlainText[file, 'post a article > login to admin page']
 		login_table.size.must_equal 2

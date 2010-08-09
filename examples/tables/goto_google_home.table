@@ -1,5 +1,6 @@
-go to google home
-== goto google home page and search ruby
-| url |
-| http://google.com |
-| http://theplant.jp |
+go to google home and search some keyword should contain some text ( this is comment )
+
+== goto google home page and search some keyword
+| keyword            | text             |
+| ruby               | "ruby-lang.org/" |
+| http://theplant.jp | "The Plant"      |

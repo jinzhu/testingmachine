@@ -1,11 +1,10 @@
-require 'rubygems'
-require 'minitest/spec'
-require 'rr'
-MiniTest::Unit.autorun
-
-class MiniTest::Spec
-  include RR::Adapters::RRMethods
+## write your helper method here
+module HelperMethods
+	def hello
+		false
+	end
 end
 
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'tester'
+class MiniTest::Spec
+	extend HelperMethods
+end

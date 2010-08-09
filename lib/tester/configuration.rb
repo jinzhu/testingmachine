@@ -11,8 +11,11 @@ module Tester
       end
 
       def config
-        config_file = File.join( root, 'config', 'tester.yml')
-        File.exist?(config_file) ? YAML.load_file(config_file) : {}
+        ['config', '../config'].map do |f|
+          config_file = File.join( root, f, 'tester.yml')
+          return YAML.load_file(config_file) if File.exist?(config_file)
+        end
+        return {}
       end
 
       def load_setting_for_types(types=[])

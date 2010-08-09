@@ -25,6 +25,7 @@ ARGV.map do |f|
   if File.file?(f)
     require f
   elsif File.directory?(f)
+    Tester::Configuration.root = File.expand_path(f)
     Dir["#{f}/**/*_spec.rb"].map { |x| require x }
   end
 end

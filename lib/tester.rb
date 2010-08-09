@@ -25,24 +25,21 @@ class MiniTest::Spec
 	class << self
 		def scenario desc, opts = {}, &block
       return unless Tester.should_run_type?(opts[:type])
-
       Tester::Configuration.load_setting_for_types(opts[:type])
       test_file = File.expand_path(caller[0].sub(/:.*$/,''))
 
-      ## TODO add settings
       it desc do
-        @_tester_name_chain = ((@_tester_name_chain || '') + ' > ' + desc).sub(/^ > /,'')
-        data_table = Tester::Table[test_file, @_tester_name_chain]
+        data_table = Tester::Table[test_file, desc]
 
-        if data_table
+        if data_table.empty?
           data_table.map do |example|
+            instance_variable_set("@_headers", example.headers)
             example.headers.map do |header|
               instance_variable_set("@#{header}", example.send(header.to_sym))
             end
             self.instance_exec(&block)
           end
         else
-          ## at least run once
           self.instance_exec(&block)
         end
       end
@@ -51,6 +48,7 @@ class MiniTest::Spec
 
     def background type = :each, opts = {}, &block
       return unless Tester.should_run_type?(opts[:type])
+
       before type do
         self.instance_exec(&block)
       end
@@ -60,26 +58,8 @@ class MiniTest::Spec
 end
 
 module Kernel
-	def feature desc, opts = {}, &block
-    # return unless Tester.should_run_type?(opts[:type])
-    test_file = File.expand_path(caller[0].sub(/:.*$/,''))
-
-    describe desc do
-      before do
-        @_tester_name_chain = ((@_tester_name_chain || '') + ' > ' + desc).sub(/^ > /,'')
-        data_table = Tester::Table[test_file, @_tester_name_chain]
-
-        if data_table
-          data_table.map do |example|
-            example.headers.map do |header|
-              instance_variable_set("@#{header}", example.send(header.to_sym))
-            end
-          end
-        end
-      end
-
-      self.instance_exec(&block)
-    end
-	end
-	alias :Feature :feature
+  def feature desc, opts = {}, &block
+    self.instance_exec(&block)
+  end
+  alias :Feature :feature
 end

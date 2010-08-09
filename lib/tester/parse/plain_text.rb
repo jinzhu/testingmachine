@@ -12,7 +12,7 @@ module Tester
 
 			def self.[](file, name)
 				parse(file) unless @@data[file]
-				@@data[file] && @@data[file][name]
+				(@@data[file] && @@data[file][name]) || []
 			end
 
 			def add_row(values)

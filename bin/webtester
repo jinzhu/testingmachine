@@ -22,10 +22,14 @@ end
 ARGV.push(Tester::Configuration.root) if ARGV.size == 0
 
 ARGV.map do |f|
+  Tester::Configuration.root = File.expand_path(f)
+  $LOAD_PATH.unshift(Tester::Configuration.root)
+
   if File.file?(f)
     require f
   elsif File.directory?(f)
-    Tester::Configuration.root = File.expand_path(f)
     Dir["#{f}/**/*_spec.rb"].map { |x| require x }
   end
+
+  $LOAD_PATH.shift
 end

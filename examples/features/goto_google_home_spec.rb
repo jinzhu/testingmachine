@@ -1,4 +1,4 @@
-require File.join(File.expand_path(File.dirname(__FILE__)), '../helper')
+require 'helper'
 
 feature "Google" do
   scenario 'goto google home page and search some keyword',:type => :javascript do

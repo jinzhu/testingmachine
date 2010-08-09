@@ -61,5 +61,5 @@ module Kernel
   def feature desc, opts = {}, &block
     describe desc, &block
   end
-alias :Feature :feature
+  alias :Feature :feature
 end

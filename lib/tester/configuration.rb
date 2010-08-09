@@ -10,6 +10,10 @@ module Tester
         @root ||= (rails_root? && File.exist?(test_path)) ? test_path : File.expand_path('.')
       end
 
+      def root=(path)
+        @root = path if File.directory?(path)
+      end
+
       def config
         ['config', '../config'].map do |f|
           config_file = File.join( root, f, 'tester.yml')

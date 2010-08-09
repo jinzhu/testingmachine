@@ -1,11 +1,11 @@
-= WebTester
+= ProTester
 
   Your trusty, tireless tester
 
   How To Install
-  $ gem install webtester
+  $ gem install protester
 
-  https://github.com/jinzhu/webtester
+  http://github.com/jinzhu/protester
 
 == Note on Patches/Pull Requests
 

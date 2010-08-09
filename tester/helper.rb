@@ -1,3 +1,5 @@
+require 'tester'
+
 module HelperMethods
 	def hello
 		false

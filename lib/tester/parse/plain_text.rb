@@ -30,7 +30,7 @@ module Tester
 
 				File.read(absolute_filepath).each_line do |line|
 					if line =~ /^== (.*)$/
-						table = self.new(file, $1)
+						table = self.new(file, $1.strip)
 					end
 
 					if table && line =~ /^\|\s/

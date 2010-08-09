@@ -31,7 +31,7 @@ class MiniTest::Spec
       it desc do
         data_table = Tester::Table[test_file, desc]
 
-        if data_table.empty?
+        if !data_table.empty?
           data_table.map do |example|
             instance_variable_set("@_headers", example.headers)
             example.headers.map do |header|
@@ -59,7 +59,7 @@ end
 
 module Kernel
   def feature desc, opts = {}, &block
-    self.instance_exec(&block)
+    describe desc, &block
   end
-  alias :Feature :feature
+alias :Feature :feature
 end

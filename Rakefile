@@ -12,6 +12,7 @@ begin
     gem.authors = ["Jinzhu"]
     gem.add_dependency "minitest"
     gem.add_dependency "capybara"
+    gem.files = FileList['lib/**/*.rb']
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new

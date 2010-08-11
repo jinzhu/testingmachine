@@ -3,9 +3,9 @@
   Your trusty, tireless testing machine
 
   How To Install
-  $ gem install testing_machine
+  $ gem install testingmachine
 
-  http://github.com/jinzhu/testing_machine
+  http://github.com/jinzhu/testingmachine
 
 == Note on Patches/Pull Requests
 

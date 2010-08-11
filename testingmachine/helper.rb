@@ -1,4 +1,4 @@
-require 'tester'
+require 'testingmachine'
 require 'rubygems'
 require 'minitest/spec'
 require 'rr'

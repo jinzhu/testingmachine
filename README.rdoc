@@ -1,11 +1,11 @@
-= ProTester
+= Testing Machine
 
-  Your trusty, tireless tester
+  Your trusty, tireless testing machine
 
   How To Install
-  $ gem install protester
+  $ gem install testing_machine
 
-  http://github.com/jinzhu/protester
+  http://github.com/jinzhu/testing_machine
 
 == Note on Patches/Pull Requests
 

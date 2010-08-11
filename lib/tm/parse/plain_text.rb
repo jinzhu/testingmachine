@@ -1,4 +1,4 @@
-module Tester
+module TM
 	module Parse
 		class PlainText
 			@@data = {}
@@ -25,7 +25,7 @@ module Tester
 			protected
 			def self.parse(file)
 				table = nil
-        absolute_filepath = File.join(Tester::Configuration.root + '/tables/', file + '.table')
+        absolute_filepath = File.join(TM::Configuration.root + '/tables/', file + '.table')
         return unless File.exist?(absolute_filepath)
 
 				File.read(absolute_filepath).each_line do |line|

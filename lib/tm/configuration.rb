@@ -1,12 +1,12 @@
 require 'yaml'
 
-module Tester
+module TM
   class Configuration
     class << self
       attr_accessor :types, :root
 
       def root
-				test_path = File.expand_path('tester')
+				test_path = File.expand_path('testingmachine')
         @root ||= File.exist?(test_path) ? test_path : File.expand_path('.')
       end
 
@@ -16,7 +16,7 @@ module Tester
 
       def config
         ['config', '../config'].map do |f|
-          config_file = File.join( root, f, 'tester.yml')
+          config_file = File.join( root, f, 'testingmachine.yml')
           return YAML.load_file(config_file) if File.exist?(config_file)
         end
         return {}

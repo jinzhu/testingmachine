@@ -9,7 +9,7 @@ In order to post a article you need to login first
 If you save a article as draft, this article should not be shown to public
 
 == post a article > save as draft
-| owner? | save_as_draft | visable? |
+| owner  | save_as_draft | visable  |
 | true   | true          | true     |
 | false  | true          | false    |
 | true   | false         | true     |

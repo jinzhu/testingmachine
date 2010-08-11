@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
 require 'optparse'
-require File.expand_path('../lib/tester',File.dirname(__FILE__))
+require File.expand_path('../lib/tm',File.dirname(__FILE__))
 
 options = {}
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: webtester -t types file1 file2 / directoris"
+  opts.banner = "Usage: tm -t types file1 file2 / directoris"
 
   opts.on( '-t', '--type types', 'types' ) do |types|
-    Tester::Configuration.types = types.split(',').map(&:to_s)
+    TM::Configuration.types = types.split(',').map(&:to_s)
   end
 
   opts.on( '-h', '--help', 'Display this screen' ) do
@@ -19,11 +19,11 @@ OptionParser.new do |opts|
   opts.parse!
 end
 
-ARGV.push(Tester::Configuration.root) if ARGV.size == 0
+ARGV.push(TM::Configuration.root) if ARGV.size == 0
 
 ARGV.map do |f|
-  Tester::Configuration.root = File.expand_path(f)
-  $LOAD_PATH.unshift(Tester::Configuration.root)
+  TM::Configuration.root = File.expand_path(f)
+  $LOAD_PATH.unshift(TM::Configuration.root)
 
   if File.file?(f)
     require f

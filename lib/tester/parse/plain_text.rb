@@ -54,7 +54,7 @@ module Tester
 				[values, headers].transpose.map do |value, header|
 					self.instance_eval <<-EOF
 						def #{header}
-							#{value} rescue #{value.inspect}
+							@#{header} ||= #{value} rescue #{value.inspect}
 						end
           EOF
 

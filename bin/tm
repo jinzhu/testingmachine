@@ -7,8 +7,12 @@ options = {}
 OptionParser.new do |opts|
   opts.banner = "Usage: tm -t types file1 file2 / directoris"
 
-  opts.on( '-t', '--type types', 'types' ) do |types|
-    TM::Configuration.types = types.split(',').map(&:to_s)
+  opts.on( '-t', '--type type', 'type' ) do |type|
+    TM::Configuration.types = (TM::Configuration.types || []) << type
+  end
+
+  opts.on( '-n', '--name name', 'only execute the feature elements which match part of the given name.' ) do |name|
+    TM::Configuration.names = (TM::Configuration.names || []) << name
   end
 
   opts.on( '-h', '--help', 'Display this screen' ) do

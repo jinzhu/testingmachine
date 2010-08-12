@@ -1,13 +1,13 @@
 require 'rails/generators'
 
-module Tm
+module TestingMachine
   class FeatureGenerator < Rails::Generators::Base
     source_root File.join(File.dirname(__FILE__), 'templates')
 
     desc <<-DESC
 Description:
     Sets up WebTM for your Rails project.
-    `rails generate tm:feature filename`
+    `rails generate testing_machine:feature feature_name dir/feature2_name`
 DESC
 
     def manifest

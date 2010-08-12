@@ -1,13 +1,13 @@
 require 'rails/generators'
 
-module Tm
+module TestingMachine
   class InstallGenerator < Rails::Generators::Base
     source_root File.join(File.dirname(__FILE__), 'templates')
 
     desc <<-DESC
 Description:
     Sets up WebTM for your Rails project.
-    `rails generate tm:install`
+    `rails generate testing_machine:install`
 DESC
 
     def manifest

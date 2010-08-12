@@ -2,18 +2,18 @@ require 'helper'
 
 feature 'Testing Machine' do
   scenario 'should run' do
-    TM::Configuration.types = nil
+    TM::Configuration.tags = nil
     TM::Configuration.names = nil
     assert TM.should_run?(nil, nil)
     assert TM.should_run?('hello', nil)
 
-    TM::Configuration.types = ['typeA']
+    TM::Configuration.tags = ['tagA']
     TM::Configuration.names = nil
     assert !TM.should_run?(nil, nil)
-    assert TM.should_run?('typeA', nil)
-    assert !TM.should_run?('typeB', nil)
+    assert TM.should_run?('tagA', nil)
+    assert !TM.should_run?('tagB', nil)
 
-    TM::Configuration.types = nil
+    TM::Configuration.tags = nil
     TM::Configuration.names = 'nameA'
     assert !TM.should_run?(nil, nil)
     assert TM.should_run?(nil, 'nameA')

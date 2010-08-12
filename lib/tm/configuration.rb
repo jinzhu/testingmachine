@@ -3,7 +3,7 @@ require 'yaml'
 module TM
   class Configuration
     class << self
-      attr_accessor :types, :names, :root
+      attr_accessor :tags, :names, :root
 
       def root
 				test_path = File.expand_path('testingmachine')
@@ -22,10 +22,10 @@ module TM
         return {}
       end
 
-      def load_setting_for_types(types=[])
-        types = types.to_a.unshift(:all)
-        types.map do |type|
-          config = self.config['types'] && self.config['types'][type.to_s]
+      def load_setting_for_tags(tags=[])
+        tags = tags.to_a.unshift(:all)
+        tags.map do |tag|
+          config = self.config['tags'] && self.config['tags'][tag.to_s]
           load_config(config)
         end
       end

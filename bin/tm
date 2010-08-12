@@ -5,14 +5,14 @@ require File.expand_path('../lib/tm',File.dirname(__FILE__))
 options = {}
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: tm -t types file1 file2 / directoris"
+  opts.banner = "Usage: tm -t tag1,tag2 spec_file"
 
-  opts.on( '-t', '--type type', 'type' ) do |type|
-    TM::Configuration.types = (TM::Configuration.types || []) << type
+  opts.on( '-t', '--tags tags', 'tags' ) do |tag|
+    TM::Configuration.tags = (TM::Configuration.tags || []).concat tag.split(',')
   end
 
   opts.on( '-n', '--name name', 'only execute the feature elements which match part of the given name.' ) do |name|
-    TM::Configuration.names = (TM::Configuration.names || []) << name
+    TM::Configuration.names = (TM::Configuration.names || []).concat name.to_a
   end
 
   opts.on( '-h', '--help', 'Display this screen' ) do

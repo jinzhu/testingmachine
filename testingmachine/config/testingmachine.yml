@@ -1,4 +1,4 @@
-types:
+tags:
   all:
     capybara:
       asset_root: 'tmp'

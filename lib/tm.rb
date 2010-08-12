@@ -11,16 +11,16 @@ Capybara.default_driver = :selenium
 MiniTest::Unit.autorun
 
 module TM
-  def self.should_run?(types=nil, name=nil)
-    should_run_types?(types) && should_run_name?(name)
+  def self.should_run?(tags=nil, name=nil)
+    should_run_tags?(tags) && should_run_name?(name)
   end
 
   protected
-  def self.should_run_types?(types)
-    return true  if TM::Configuration.types.nil?
-    return false if types.nil?
-    types = types.to_a.map(&:to_s)
-    (types - TM::Configuration.types) != types
+  def self.should_run_tags?(tags)
+    return true  if TM::Configuration.tags.nil?
+    return false if tags.nil?
+    tags = tags.to_a.map(&:to_s)
+    (tags - TM::Configuration.tags) != tags
   end
 
   def self.should_run_name?(name)
@@ -34,8 +34,8 @@ class MiniTest::Spec
 
 	class << self
 		def scenario desc, opts = {}, &block
-      return unless TM.should_run?(opts[:type], desc)
-      TM::Configuration.load_setting_for_types(opts[:type])
+      return unless TM.should_run?(opts[:tag], desc)
+      TM::Configuration.load_setting_for_tags(opts[:tag])
       test_file = File.expand_path(caller[0].sub(/:.*$/,''))
 
       it desc do
@@ -57,7 +57,7 @@ class MiniTest::Spec
     alias :Scenario :scenario
 
     def background type = :each, opts = {}, &block
-      return unless TM.should_run?(opts[:type])
+      return unless TM.should_run?(opts[:tag])
 
       before type do
         self.instance_exec(&block)

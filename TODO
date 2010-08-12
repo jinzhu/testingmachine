@@ -1,4 +1,7 @@
-1, more table parser adapters: excel sql(web interface)?
-2, support multi tables?
+1, more table parser adapters: excel sql(web interface)
+2, support multi tables???
 3, rake task
-4, write more test
+4, generator without rails
+5, only run one test case?
+6, email error message
+7, parallel, distributed test

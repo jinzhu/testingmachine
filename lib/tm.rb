@@ -39,7 +39,11 @@ class MiniTest::Spec
       test_file = File.expand_path(caller[0].sub(/:.*$/,''))
 
       it desc do
-        data_table = TM::Table[test_file, desc]
+        if TM::Configuration.data
+          data_table = eval("TM::Table[test_file, desc][#{TM::Configuration.data}].to_a")
+        else
+          data_table = TM::Table[test_file, desc]
+        end
 
         if !data_table.empty?
           data_table.map do |example|

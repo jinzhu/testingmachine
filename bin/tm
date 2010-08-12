@@ -11,6 +11,10 @@ OptionParser.new do |opts|
     TM::Configuration.tags = (TM::Configuration.tags || []).concat tag.split(',')
   end
 
+  opts.on( '-d', '--data data', 'data' ) do |data|
+    TM::Configuration.data = data
+  end
+
   opts.on( '-n', '--name name', 'only execute the feature elements which match part of the given name.' ) do |name|
     TM::Configuration.names = (TM::Configuration.names || []).concat name.to_a
   end

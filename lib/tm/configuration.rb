@@ -3,7 +3,7 @@ require 'yaml'
 module TM
   class Configuration
     class << self
-      attr_accessor :tags, :names, :root
+      attr_accessor :tags, :names, :root, :data
 
       def root
 				test_path = File.expand_path('testingmachine')

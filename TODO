@@ -3,4 +3,5 @@
 3, rake task
 4, generator without rails
 5, email error message
-6, parallel, distributed test
+6, screenshot
+7, parallel, distributed test
